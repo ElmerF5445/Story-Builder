@@ -1,0 +1,11 @@
+.SB_Editor_Banner{
+    width: 100%;
+    max-width: 800px;
+    /* background-color: red; */
+    justify-content: left;
+}
+
+.SB_Editor_Banner_Image{
+    width: 250px;
+    height: 250px;
+}

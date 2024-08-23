@@ -1,0 +1,214 @@
+/* img{
+    display: none;
+} */
+
+.SB_Renderer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.SB_Renderer_Contents > *{
+    pointer-events: all;
+    user-select: all;
+}
+
+.SB_Renderer_Banner{
+    height: 300px;
+    /* background-color: red; */
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SB_Renderer_Banner_Image{
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    display: block;
+}
+
+.SB_Renderer_Header{
+    width: 100%;
+    max-width: 800px;
+}
+
+.SB_Renderer_Contents{
+    width: 100%;
+    max-width: 800px;
+}
+
+.SB_Renderer_Header_Title{
+    font-family: var(--Text-Font-Primary);
+    color: var(--Text-Color);
+    font-size: 50px;
+    /* height: 65px; */
+    font-weight: bolder;
+}
+
+.SB_Renderer_Header_Details{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 15px;
+}
+
+.SB_Renderer_Header_Details_Title, .SB_Renderer_Header_Details_Data{
+    font-family: var(--Text-Font-Secondary);
+    color: var(--Text-Color);
+    margin: 0;
+}
+
+.SB_Renderer_Header_Details_Title{
+    font-weight: bolder;
+}
+
+.SB_Renderer_Title_Primary{
+    font-family: var(--Text-Font-Primary);
+    color: var(--Text-Color);
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.SB_Renderer_Title_Secondary{
+    font-family: var(--Text-Font-Primary);
+    color: var(--Text-Color);
+    font-size: 30px;
+}
+
+.SB_Renderer_Paragraph{
+    font-family: var(--Text-Font-Secondary);
+    color: var(--Text-Color);
+    text-align: justify;
+}
+
+.SB_Renderer_List{
+    font-family: var(--Text-Font-Secondary);
+    color: var(--Text-Color);
+}
+
+.SB_Renderer_Quote{
+    display: grid;
+    /* grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr; */
+    grid-template-areas: 
+        "Apostrophe_1 Input Apostrophe_2"
+        "Source Source Source"
+    ;
+    grid-template-columns: auto 1fr auto;
+    grid-gap: 10px;
+}
+
+.SB_Renderer_Quote_Apostrophe{
+    font-family: var(--Text-Font-Primary);
+    color: var(--Text-Color);
+    opacity: 75%;
+    font-size: 50px;
+    margin: 0;
+}
+
+.Apostrophe_1{
+    grid-area: Apostrophe_1;
+}
+
+.SB_Renderer_Quote_Content{
+    grid-area: Input;
+    font-size: 25px;
+    font-style: italic;
+    font-family: var(--Text-Font-Secondary);
+    color: var(--Text-Color);
+}
+
+.Apostrophe_2{
+    grid-area: Apostrophe_2;
+    align-self: flex-end;
+}
+
+.SB_Renderer_Quote_Source{
+    grid-area: Source;
+    /* padding-left: 30px; */
+    font-family: var(--Text-Font-Secondary);
+    color: var(--Text-Color);
+    font-style: italic;
+}
+
+.SB_Renderer_Image{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-gap: 5px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.SB_Renderer_Image_Image{
+    width: fit-content;
+    max-width: 780px;
+}
+
+.SB_Renderer_Image_Description, .SB_Renderer_Image_Credits{
+    font-family: var(--Text-Font-Secondary);
+    color: var(--Text-Color);
+    margin: 0;
+}
+
+.SB_Renderer_Image_Credits{
+    font-style: italic;
+    opacity: 50%;
+}
+
+.SB_Renderer_Video{
+    
+}
+
+.SB_Renderer_Video_Video{
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: transparent;
+    outline: transparent;
+}
+
+.Ribbon_Toggle{
+    display: none;
+}
+
+.SB_Renderer_Dialog{
+    display: grid;
+    grid-template-columns: 150px 10px 1fr;
+    grid-gap: 5px;
+    /* padding: 5px; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: auto;
+}
+
+.SB_Renderer_Dialog_Character{
+    font-family: var(--Text-Font-Secondary);
+    color: var(--Text-Color);
+    margin: 0;
+    font-style: italic;
+    text-align: right;
+    
+}
+
+.SB_Renderer_Dialog_Colon{
+    font-family: var(--Text-Font-Secondary);
+    color: var(--Text-Color);
+    margin: 0;
+    text-align: center;
+}
+
+.SB_Renderer_Dialog_Text{
+    font-family: var(--Text-Font-Secondary);
+    color: var(--Text-Color);
+    margin: 0;
+    /* padding-top: 2px; */
+    word-break: keep-all;
+    word-wrap: break-word;
+    text-align: justify;
+}
