@@ -65,6 +65,7 @@ function Editor_Element_Add(Type){
             "Content": "",
             // "Height": "69px"
         }
+        Editor_LastInteracted_Set("Element_" + SB_Editor_Data.Contents.length);
     }
     if (Type == "Secondary_Title"){
         Editor_Element_Content = {
@@ -72,6 +73,7 @@ function Editor_Element_Add(Type){
             "Content": "",
             // "Height": "63px"
         }
+        Editor_LastInteracted_Set("Element_" + SB_Editor_Data.Contents.length);
     }
     if (Type == "Paragraph"){
         Editor_Element_Content = {
@@ -79,6 +81,7 @@ function Editor_Element_Add(Type){
             "Content": "",
             // "Height": "56px"
         }
+        Editor_LastInteracted_Set("Element_" + SB_Editor_Data.Contents.length);
     }
     if (Type == "Image"){
         Editor_Element_Content = {
@@ -87,6 +90,7 @@ function Editor_Element_Add(Type){
             "Description": "",
             "Credits": "" 
         }
+        Editor_LastInteracted_Set("Element_Image_Source_" + SB_Editor_Data.Contents.length);
     }
     if (Type == "Numbered_List"){
         Editor_Element_Content = {
@@ -94,6 +98,7 @@ function Editor_Element_Add(Type){
             "Header": "",
             "Content": ""
         }
+        Editor_LastInteracted_Set("Element_List_Header_Numbered_" + SB_Editor_Data.Contents.length);
     }
     if (Type == "Bulleted_List"){
         Editor_Element_Content = {
@@ -101,6 +106,7 @@ function Editor_Element_Add(Type){
             "Header": "",
             "Content": ""
         }
+        Editor_LastInteracted_Set("Element_List_Header_Bulleted_" + SB_Editor_Data.Contents.length);
     }
     if (Type == "Quote"){
         Editor_Element_Content = {
@@ -108,12 +114,14 @@ function Editor_Element_Add(Type){
             "Content": "",
             "Source": ""
         }
+        Editor_LastInteracted_Set("Element_Quote_Content_" + SB_Editor_Data.Contents.length);
     }
     if (Type == "Video"){
         Editor_Element_Content = {
             "Type": "Video",
             "Source": ""
         }
+        Editor_LastInteracted_Set("Element_Video_Source_" + SB_Editor_Data.Contents.length);
     }
     if (Type == "Dialog"){
         Editor_Element_Content = {
@@ -122,6 +130,7 @@ function Editor_Element_Add(Type){
             "Dialog": "",
             "Tags": ""
         }
+        Editor_LastInteracted_Set("Element_Dialog_Character_" + SB_Editor_Data.Contents.length);
     }
 
     SB_Editor_Data.Contents.push(Editor_Element_Content);
@@ -210,26 +219,26 @@ function Editor_Article_Render(){
 
         if (Object.Type == "Primary_Title"){
             Element_InnerHTML = `
-                <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Title" id="Element_${a}" autocomplete="off" Autoresize="true" placeholder="Primary title" Element_Type="Title_Primary" value="${Object.Content}" onchange="Editor_Article_Data_Update(), TextArea_SnapToSize(this.id)"></textarea>
+                <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Title" id="Element_${a}" autocomplete="off" Autoresize="true" placeholder="Primary title" Element_Type="Title_Primary" value="${Object.Content}" onchange="Editor_Article_Data_Update(), TextArea_SnapToSize(this.id)" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"></textarea>
             `;
         }
         if (Object.Type == "Secondary_Title"){
             Element_InnerHTML = `
-                <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Title" id="Element_${a}" autocomplete="off" Autoresize="true" placeholder="Secondary title" Element_Type="Title_Secondary" value="${Object.Content}" onchange="Editor_Article_Data_Update(), TextArea_SnapToSize(this.id)"></textarea>
+                <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Title" id="Element_${a}" autocomplete="off" Autoresize="true" placeholder="Secondary title" Element_Type="Title_Secondary" value="${Object.Content}" onchange="Editor_Article_Data_Update(), TextArea_SnapToSize(this.id)" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"></textarea>
             `;
         }
         if (Object.Type == "Paragraph"){
             Element_InnerHTML = `
-                <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Paragraph" id="Element_${a}" autocomplete="off" Autoresize="true" placeholder="Paragraph" Element_Type="Paragraph" value="${Object.Content}" onchange="Editor_Article_Data_Update(), TextArea_SnapToSize(this.id)"></textarea>
+                <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Paragraph" id="Element_${a}" autocomplete="off" Autoresize="true" placeholder="Paragraph" Element_Type="Paragraph" value="${Object.Content}" onchange="Editor_Article_Data_Update(), TextArea_SnapToSize(this.id)" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"></textarea>
             `;
         }
         if (Object.Type == "Image"){
             Element_InnerHTML = `
                 <div class="SB_Element_Image" Element_Type="Image" id="Element_${a}">
                     <img class='SB_Element_Image_Image' src='${Object.Source}' draggable='false' loading='lazy'/>
-                    <input type="text" class="Input_Text SB_Editor_Input Image_Source" id="" autocomplete="off" placeholder="Source" value="${Object.Source}" onchange="Editor_Article_Data_Update()"/>
-                    <input type="text" class="Input_Text SB_Editor_Input Image_Description" id="" autocomplete="off" placeholder="Description" value="${Object.Description}" onchange="Editor_Article_Data_Update()"/>
-                    <input type="text" class="Input_Text SB_Editor_Input Image_Credits" id="" autocomplete="off" placeholder="Credits" value="${Object.Credits}" onchange="Editor_Article_Data_Update()"/>
+                    <input type="text" class="Input_Text SB_Editor_Input Image_Source" id="Element_Image_Source_${a}" autocomplete="off" placeholder="Source" value="${Object.Source}" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"/>
+                    <input type="text" class="Input_Text SB_Editor_Input Image_Description" id="Element_Image_Description_${a}" autocomplete="off" placeholder="Description" value="${Object.Description}" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"/>
+                    <input type="text" class="Input_Text SB_Editor_Input Image_Credits" id="Element_Image_Credits_${a}" autocomplete="off" placeholder="Credits" value="${Object.Credits}" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"/>
                 </div>
             `;
             Sidebar_InnerHTML = `
@@ -255,8 +264,8 @@ function Editor_Article_Render(){
         if (Object.Type == "Numbered_List"){
             Element_InnerHTML = `
                 <div class="SB_Element_List" Element_Type="Numbered_List" id="Element_${a}">
-                    <input type="text" class="Input_Text SB_Editor_Input List_Header" id="" autocomplete="off" placeholder="Numbered list header" onchange="Editor_Article_Data_Update()"/>
-                    <textarea type="text" class="Input_Text_Long SB_Editor_Input List_Contents" id="" autocomplete="off" Autoresize="true" placeholder="List contents (Use line breaks to separate line items)" onchange="Editor_Article_Data_Update()"></textarea>
+                    <input type="text" class="Input_Text SB_Editor_Input List_Header" id="Element_List_Header_Numbered_${a}" autocomplete="off" placeholder="Numbered list header" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"/>
+                    <textarea type="text" class="Input_Text_Long SB_Editor_Input List_Contents" id="Element_List_Content_Numbered_${a}" autocomplete="off" Autoresize="true" placeholder="List contents (Use line breaks to separate line items)" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"></textarea>
                 </div>
             `;
             Sidebar_InnerHTML = `
@@ -282,8 +291,8 @@ function Editor_Article_Render(){
         if (Object.Type == "Bulleted_List"){
             Element_InnerHTML = `
                 <div class="SB_Element_List" Element_Type="Bulleted_List" id="Element_${a}">
-                    <input type="text" class="Input_Text SB_Editor_Input List_Header" id="" autocomplete="off" placeholder="Bulleted list header" onchange="Editor_Article_Data_Update()"/>
-                    <textarea type="text" class="Input_Text_Long SB_Editor_Input List_Contents" id="" autocomplete="off" Autoresize="true" placeholder="List contents (Use line breaks to separate line items)" onchange="Editor_Article_Data_Update()"></textarea>
+                    <input type="text" class="Input_Text SB_Editor_Input List_Header" id="Element_List_Header_Bulleted_${a}" autocomplete="off" placeholder="Bulleted list header" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"/>
+                    <textarea type="text" class="Input_Text_Long SB_Editor_Input List_Contents" id="Element_List_Content_Bulleted${a}" autocomplete="off" Autoresize="true" placeholder="List contents (Use line breaks to separate line items)" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"></textarea>
                 </div>
             `;
             Sidebar_InnerHTML = `
@@ -312,11 +321,11 @@ function Editor_Article_Render(){
                     <h1 class="SB_Element_Quote_Apostrophe Apostrophe_1">
                         "
                     </h1>
-                    <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Quote_Contents Quote_Content" id="" autocomplete="off" Autoresize="true" placeholder="Quote" onchange="Editor_Article_Data_Update()"></textarea>
+                    <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Quote_Contents Quote_Content" id="Element_Quote_Content_${a}" autocomplete="off" Autoresize="true" placeholder="Quote" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"></textarea>
                     <h1 class="SB_Element_Quote_Apostrophe Apostrophe_2">
                         "
                     </h1>
-                    <input type="text" class="Input_Text SB_Editor_Input SB_Element_Quote_Source Quote_Source" id="" autocomplete="off" placeholder="Source" onchange="Editor_Article_Data_Update()"/>
+                    <input type="text" class="Input_Text SB_Editor_Input SB_Element_Quote_Source Quote_Source" id="Element_Quote_Source_${a}" autocomplete="off" placeholder="Source" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"/>
                 </div>
             `;
         }
@@ -324,7 +333,7 @@ function Editor_Article_Render(){
             Element_InnerHTML = `
                 <div class="SB_Element_Video" Element_Type="Video" id="Element_${a}">
                     <iframe class="SB_Element_Video_Video" src="${Object.Source}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
-                    <input type="text" class="Input_Text SB_Editor_Input Video_Source" id="" autocomplete="off" placeholder="Source" onchange="Editor_Article_Data_Update()"/>
+                    <input type="text" class="Input_Text SB_Editor_Input Video_Source" id="Element_Video_Source_${a}" autocomplete="off" placeholder="Source" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"/>
                 </div>
             `;
             Sidebar_InnerHTML = `
@@ -350,11 +359,11 @@ function Editor_Article_Render(){
         if (Object.Type == "Dialog"){
             Element_InnerHTML = `
                 <div class="SB_Element_Dialog" Element_Type="Dialog" id="Element_${a}">
-                    <input type="text" class="Input_Text SB_Editor_Input SB_Element_Dialog_Character" id="" autocomplete="off" placeholder="Character" onchange="Editor_Article_Data_Update()"/>
+                    <input type="text" class="Input_Text SB_Editor_Input SB_Element_Dialog_Character" id="Element_Dialog_Character_${a}" autocomplete="off" placeholder="Character" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"/>
                     <p class="General_Paragraph">
                         :
                     </p>
-                    <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Dialog_Text" id="" autocomplete="off" Autoresize="true" placeholder="Dialog" onchange="Editor_Article_Data_Update()"></textarea>
+                    <textarea type="text" class="Input_Text_Long SB_Editor_Input SB_Element_Dialog_Text" id="Element_Dialog_Content_${a}" autocomplete="off" Autoresize="true" placeholder="Dialog" onchange="Editor_Article_Data_Update()" oninput="TextArea_SnapToSize(this.id), Editor_LastInteracted_Set(this.id)"></textarea>
                 </div>
             `;
             Sidebar_InnerHTML = `
@@ -436,6 +445,7 @@ function Editor_Article_Render_Data(){
         
     }
     TextArea_SnapToSize_All();
+    Editor_LastInteracted_Focus();
 }
 
 function Editor_Article_Data_Update(){
@@ -484,6 +494,7 @@ function Editor_Article_Data_Update(){
             SB_Editor_Data.Contents[a].Dialog = document.getElementById(`Element_${a}`).querySelector(".SB_Element_Dialog_Text").value;
         }
     }
+    Editor_Progress_Save();
     Editor_Article_Render();
 }
 
@@ -588,3 +599,29 @@ function Editor_Tag_Add(Tag_Opening, Tag_Closing){
          Editor_Tag_Add('<ol>', '</ol>'); 
      }
  });
+
+ var Editor_Element_LastInteracted;
+function Editor_LastInteracted_Set(ID){
+    Editor_Element_LastInteracted = ID;
+}
+function Editor_LastInteracted_Focus(){
+    if (document.getElementById(Editor_Element_LastInteracted) != null){
+        document.getElementById(Editor_Element_LastInteracted).focus();
+    }
+    
+}
+
+function Editor_Progress_Save(){
+    localStorage.setItem("SB_Project_Progress", JSON.stringify(SB_Editor_Data));
+    document.getElementById("pageElement_Header_Title").innerHTML = "Editor | Progress saved [" + document.getElementById("Header_StatusTray_Clock_Time").innerText + "]";
+}
+
+function Editor_Progress_Load(){
+    if (localStorage.getItem("SB_Project_Progress") != null){
+        SB_Editor_Data = JSON.parse(localStorage.getItem("SB_Project_Progress"));
+        Editor_Article_Render();
+        Toasts_CreateToast("Assets/Icons/iconNew_download.png", "Progress loaded", "The editor had been loaded to its recent state.");
+    } else if (localStorage.getItem("SB_Project_Progress") == null){
+        Toasts_CreateToast("Assets/Icons/icon_error.png", "Progress not found", "There were no recent saved progress.");
+    }
+}
